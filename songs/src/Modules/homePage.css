@@ -1,0 +1,13 @@
+.mic-area{
+height: 90vh;
+width: 100%;
+/* margin-top: ; */
+}
+
+.mic-style{
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    text-align: center;
+    cursor: pointer;
+}
