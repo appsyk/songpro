@@ -99,6 +99,7 @@ class SearchBar extends React.Component {
     this.setState({ spin: true, spn: !this.state.spn });
 
     this.props.onFormSubmitProp(this.state.term);
+    document.querySelector('.mic-style').style.display = 'none';
   }
 
   componentDidMount() {
