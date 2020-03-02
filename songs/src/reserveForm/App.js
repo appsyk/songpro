@@ -16,18 +16,19 @@ class ResForm extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const rents = [];
     querySnapshot.forEach((doc) => {
-      const { userName, parkingPlace } = doc.data();
+      const { userName, parkingPlace, vehicleName, vehicleNumber,
+        email, phoneNumber, arrivingTime, leavingTime } = doc.data();
       rents.push({
         key: doc.id,
         doc, // DocumentSnapshot
         userName,
         parkingPlace,
-        // vehicleName,
-        // vehicleNumber,
-        // email,
-        // phoneNumber,
-        // arrivingTime,
-        // leavingTime,
+        vehicleName,
+        vehicleNumber,
+        email,
+        phoneNumber,
+        arrivingTime,
+        leavingTime,
       });
     });
     this.setState({
@@ -54,11 +55,11 @@ class ResForm extends Component {
               <thead>
                 <tr>
                   <th>userName</th>
-                  <th>parkingPlace</th>
-                  {/* <th>vehicleName</th>
-                  <th>vehicleNumber</th>
+                  {/* <th>parkingPlace</th>
+                  <th>vehicleName</th>
+                  <th>vehicleNumber</th> */}
                   <th>email</th>
-                  <th>phoneNumber</th>
+                  {/* <th>phoneNumber</th>
                   <th>arrivingTime</th>
                   <th>leavingTime</th> */}
                 </tr>
@@ -67,11 +68,11 @@ class ResForm extends Component {
                 {this.state.rents.map(rent =>
                   <tr>
                     <td><Link to={`/show/${rent.key}`}>{rent.userName}</Link></td>
-                    <td>{rent.parkingPlace}</td>
-                    {/* <td>{rent.vehicleName}</td>
-                    <td>{rent.vehicleNumber}</td>
+                    {/* <td>{rent.parkingPlace}</td>
+                    <td>{rent.vehicleName}</td>
+                    <td>{rent.vehicleNumber}</td> */}
                     <td>{rent.email}</td>
-                    <td>{rent.phoneNumber}</td>
+                    {/* <td>{rent.phoneNumber}</td>
                     <td>{rent.arrivingTime}</td>
                     <td>{rent.leavingTime}</td> */}
                   </tr>

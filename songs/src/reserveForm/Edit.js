@@ -8,14 +8,15 @@ class Edit extends Component {
     super(props);
     this.state = {
       key: '',
-      firstName: '',
-      lastName: '',
+      userName: '',
+      // firstName: '',
+      // lastName: '',
       email: '',
-      lat: '',
-      noOfSpaces: '',
-      lng: '',
-      address: '',
-      describe: ''
+      // lat: '',
+      // noOfSpaces: '',
+      // lng: '',
+      // address: '',
+      // describe: ''
     };
   }
 
@@ -26,14 +27,15 @@ class Edit extends Component {
         const rent = doc.data();
         this.setState({
           key: doc.id,
-          firstName: rent.firstName,
-          lastName: rent.lastName,
+          userName: rent.userName,
+          // firstName: rent.firstName,
+          // lastName: rent.lastName,
           email: rent.email,
-          lat: rent.lat,
-          noOfSpaces: rent.noOfSpaces,
-          lng: rent.lng,
-          address: rent.address,
-          describe: rent.describe
+          // lat: rent.lat,
+          // noOfSpaces: rent.noOfSpaces,
+          // lng: rent.lng,
+          // address: rent.address,
+          // describe: rent.describe
         });
       } else {
         console.log("No such document!");
@@ -50,31 +52,37 @@ class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const {  firstName, lastName, email, lat,
-      noOfSpaces, lng, address, describe  } = this.state;
+    const { userName, 
+      // firstName, lastName, 
+      email, 
+      // lat,
+      // noOfSpaces, lng, address, describe  
+    } = this.state;
 
     const updateRef = firebase.firestore().collection('rents').doc(this.state.key);
     updateRef.set({
-      firstName,
-      lastName,
+    userName,
+      // firstName,
+      // lastName,
       email,
-      lat,
-      noOfSpaces,
-      lng,
-      address,
-      describe
+      // lat,
+      // noOfSpaces,
+      // lng,
+      // address,
+      // describe
 
     }).then((docRef) => {
       this.setState({
         key: '',
-        firstName: '',
-        lastName: '',
+        userName: '',
+        // firstName: '',
+        // lastName: '',
         email: '',
-        lat: '',
-        noOfSpaces: '',
-        lng: '',
-        address: '',
-        describe: ''
+        // lat: '',
+        // noOfSpaces: '',
+        // lng: '',
+        // address: '',
+        // describe: ''
       });
       this.props.history.push("/show/"+this.props.match.params.id)
     })
@@ -95,17 +103,17 @@ class Edit extends Component {
           <div className="panel-body">
             <h4><Link to={`/show/${this.state.key}`} className="btn btn-primary">Board List</Link></h4>
             <form onSubmit={this.onSubmit}>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label for="title">Title:</label>
                 <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="Title" />
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="userName">Username:</label>
                 <input type="text" className="form-control" name="userName" value={this.state.userName} onChange={this.onChange} placeholder="userName" required/>
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="parkingPlace">Parking Place:</label>
                 <input type="text" className="form-control" name="parkingPlace" value={this.state.parkingPlace} onChange={this.onChange} placeholder="parkingPlace" required/>
               </div>
@@ -118,14 +126,14 @@ class Edit extends Component {
               <div className="form-group">
                 <label htmlFor="vehicleNumber">Vehicle Number:</label>
                 <input type="text" className="form-control" name="vehicleNumber" value={this.state.vehicleNumber} onChange={this.onChange} placeholder="vehicleNumber" required/>
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="email">Email:</label>
                 <input type="text" className="form-control" name="email" value={this.state.email} onChange={this.onChange} placeholder="email" required/>
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="phoneNumber">Phone Number:</label>
                 <input type="text" className="form-control" name="phoneNumber" value={this.state.phoneNumber} onChange={this.onChange} placeholder="phoneNumber" required/>
               </div>
@@ -138,7 +146,7 @@ class Edit extends Component {
               <div className="form-group">
                 <label htmlFor="leavingTime">Leaving Time:</label>
                 <input type="text" className="form-control" name="leavingTime" value={this.state.leavingTime} onChange={this.onChange} placeholder="leavingTime" required/>
-              </div>
+              </div> */}
               {/* <div className="form-group">
                 <label for="description">Description:</label>
                 <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="Description" />

@@ -16,7 +16,8 @@ class SearchBar extends React.Component {
     term: '',
     spin: false,
     spn: false,
-    listening: false
+    listening: false,
+    // autoFoc: false
   };
   //-----------------------------------------------------------------
 
@@ -64,7 +65,7 @@ class SearchBar extends React.Component {
       }
       // document.getElementById('interim').innerHTML = interimTranscript
       // document.getElementById('final').innerHTML = finalTranscript
-      console.log('Final Text', finalTranscript,"-----",interimTranscript)
+      console.log('Final Text', finalTranscript, "-----", interimTranscript)
       this.setState({
         term: finalTranscript
       })
@@ -99,7 +100,11 @@ class SearchBar extends React.Component {
     this.setState({ spin: true, spn: !this.state.spn });
 
     this.props.onFormSubmitProp(this.state.term);
-    document.querySelector('.mic-style').style.display = 'none';
+    setTimeout(() => {
+      document.querySelector('.mic-style').style.display = 'none';
+      document.querySelector('.mic-btn').style.cssText = "display: 'block'; transition: 1s ease-out";
+    }, 1000);
+
   }
 
   componentDidMount() {
@@ -119,27 +124,32 @@ class SearchBar extends React.Component {
       });
     }
   }
-  
+
   micLogo() {
     const micStyle = {
       textShadow: '4px 4px 4px rgb(0, 10, 42)',
       color: 'black'
     }
     return (
-        <div onClick={this.toggleListen}>
-          <span class="intro-banner-vdo-play-btn pinkBg" target="_blank">
-            <i class="fa fa-microphone" style={micStyle} aria-hidden="true"></i>
-            <span class="ripple pinkBg"></span>
-            <span class="ripple pinkBg"></span>
-            <span class="ripple pinkBg"></span>
-          </span>
-        </div>
+      <div onClick={this.toggleListen}>
+        <span class="intro-banner-vdo-play-btn pinkBg" target="_blank">
+          <i class="fa fa-microphone" style={micStyle} aria-hidden="true"></i>
+          <span class="ripple pinkBg"></span>
+          <span class="ripple pinkBg"></span>
+          <span class="ripple pinkBg"></span>
+        </span>
+      </div>
     );
   }
 
   render(props) {
 
-    
+    // if(this.state.term){
+    //   const autO = true;
+    // }
+
+    // document.querySelector('clickid').autoFocus;
+    console.log(this.state.autoFoc)
 
 
     return (
@@ -150,8 +160,13 @@ class SearchBar extends React.Component {
             <i className="fa fa-music fa-3x" style={{ textShadow: '4px 4px 4px rgb(0, 0, 0)', color: 'rgb(2, 203, 252)' }}></i>
             <a href='/'><h2 className="filmIn logoName logo-nm-ad" style={{ color: '#02CBFC', marginTop: '2vh' }} >SongPro</h2></a>
 
+            <button class="mic-btn" style={{ display: 'none' }} id="mic-btn-id" onClick={this.toggleListen}>
+              <i class="fa fa-microphone" style={{ color: 'black' }} title="Activate Mic" aria-hidden="true"></i>
+            </button>
+
             <form className="form-inline, searchBar myHomefont" onSubmit={this.onSubmitHandle}>
-              <input className="form-control mr-sm-4 col-sm-12"
+            {/* {this.state.term ? ( */}
+            <input className="form-control mr-sm-4 col-sm-12"
                 type='search'
                 onChange={e => { this.setState({ term: e.target.value }) }}
                 value={this.state.term}
@@ -159,7 +174,19 @@ class SearchBar extends React.Component {
                 aria-label="Search"
                 list="search"
                 autoComplete="on"
-              />
+                autoFocus={this.state.term ? true : false}
+            />
+             {/* ) : (<input className="form-control mr-sm-4 col-sm-12"
+              type='search'
+              onChange={e => { this.setState({ term: e.target.value }) }}
+              value={this.state.term}
+              placeholder='Search for songs ....'
+              aria-label="Search"
+              list="search"
+              autoComplete="on"
+              autoFocus="flase"
+            />)} */}
+              
             </form>
 
             <div className="myHomefont" style={{ marginLeft: '0.5%' }}>

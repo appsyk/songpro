@@ -95,6 +95,20 @@
     animation:ripple 1.8s infinite
 }
 
+/* .mic-btn.intro-banner-vdo-play-btn .ripple{
+    position:absolute;
+    width:50px;
+    height:30px;
+    z-index:-1;
+    left:50%;
+    top:50%;
+    opacity:0;
+    margin:-80px 0 0 -80px;
+    border-radius:100px;
+    -webkit-animation:ripple 1.8s infinite;
+    animation:ripple 1.8s infinite 
+}*/
+
 @-webkit-keyframes ripple{
     0%{
         opacity:1;
@@ -127,3 +141,65 @@
     animation-delay:.6s;
     -webkit-animation-delay:.6s
 }
+
+
+  .mic-btn {
+    background-color: #004A7F;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+  }
+  @-webkit-keyframes glowing {
+    0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @-moz-keyframes glowing {
+    0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @-o-keyframes glowing {
+    0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+    50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
+    100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
+  }
+  
+  @keyframes glowing {
+    0% { background-color: rgb(0, 166, 178); box-shadow: 0 0 3px rgba(0, 178, 178, 0.945); }
+    50% { background-color: rgb(0, 204, 255); box-shadow: 0 0 40px rgba(0, 204, 255, 0.911); }
+    100% { background-color: rgb(0, 142, 178); box-shadow: 0 0 3px rgba(0, 172, 178, 0.945); }
+  }
+
+  /* .mic-style{
+    animation: fadeOut 3s ease-out;
+  } */
+/* 
+  .mic-btn{
+    animation: fade-in 1s ease-out;
+  } */
+
+  /* @keyframes fadeOut{
+      0%{
+          opacity: 0;
+          transform: scale(1);
+      }
+      100%{
+          opacity: 1;
+          transform: scale(2);
+      }
+  } */

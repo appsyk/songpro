@@ -8,14 +8,15 @@ class Create extends Component {
     super();
     this.ref = firebase.firestore().collection('rents');
     this.state = {
-      firstName: '',
-      lastName: '',
+      userName:'',
+      // firstName: '',
+      // lastName: '',
       email: '',
-      lat: '',
-      noOfSpaces: '',
-      lng: '',
-      address: '',
-      describe: ''
+      // lat: '',
+      // noOfSpaces: '',
+      // lng: '',
+      // address: '',
+      // describe: ''
     };
   }
   onChange = (e) => {
@@ -27,23 +28,30 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, lat,
-      noOfSpaces, lng, address, describe } = this.state;
+    const { userName,
+      // firstName, lastName, 
+      email, 
+      // lat,
+      // noOfSpaces, lng, address, describe 
+    } = this.state;
 
     this.ref.add({
-      firstName, lastName, email, lat,
-      noOfSpaces, lng, address, describe
+      userName,
+      email,
+      // lastName, 
+        // lat,
+      // noOfSpaces, lng, address, describe
 
     }).then((docRef) => {
       this.setState({
-        firstName: '',
-        lastName: '',
+        userName: '',
+        // lastName: '',
         email: '',
-        lat: '',
-        noOfSpaces: '',
-        lng: '',
-        address: '',
-        describe: ''
+        // lat: '',
+        // noOfSpaces: '',
+        // lng: '',
+        // address: '',
+        // describe: ''
       });
       this.props.history.push("/")
     })
@@ -53,8 +61,11 @@ class Create extends Component {
   }
 
   render() {
-    const { userName, parkingPlace, vehicleName, vehicleNumber,
-       email, phoneNumber, arrivingTime, leavingTime } = this.state;
+    const { userName,
+      //  parkingPlace, vehicleName, vehicleNumber,
+       email,
+        // phoneNumber, arrivingTime, leavingTime 
+      } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">
@@ -71,11 +82,11 @@ class Create extends Component {
                 <input type="text" className="form-control" name="userName" value={userName} onChange={this.onChange} placeholder="userName" required/>
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="parkingPlace">Parking Place:</label>
                 <input type="text" className="form-control" name="parkingPlace" value={parkingPlace} onChange={this.onChange} placeholder="parkingPlace" required/>
               </div>
-{/* 
+
               <div className="form-group">
                 <label htmlFor="vehicleName">Vehicle Name:</label>
                 <input type="text" className="form-control" name="vehicleName" value={vehicleName} onChange={this.onChange} placeholder="vehicleName" required/>
@@ -84,14 +95,14 @@ class Create extends Component {
               <div className="form-group">
                 <label htmlFor="vehicleNumber">Vehicle Number:</label>
                 <input type="text" className="form-control" name="vehicleNumber" value={vehicleNumber} onChange={this.onChange} placeholder="vehicleNumber" required/>
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="email">Email:</label>
                 <input type="text" className="form-control" name="email" value={email} onChange={this.onChange} placeholder="email" required/>
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="phoneNumber">Phone Number:</label>
                 <input type="text" className="form-control" name="phoneNumber" value={phoneNumber} onChange={this.onChange} placeholder="phoneNumber" required/>
               </div>
@@ -118,18 +129,16 @@ class Create extends Component {
           </div>
         </div>
 {/* --------------------------------------------------------------------------------------------------- */}
-        <div>
+        {/* <div>
           <section id="contact">
             <div className="container">
               <div className="row">
                 <div className="colmd-12">
                   <div className="contact_area text-center">
                     <h3>Rent out your parking places</h3>
-                    {/* <p>You can Rentout your own places for parking.</p> */}
                   </div>
                 </div>
               </div>
-              {/* <!--End of row--> */}
               <div className="row">
                 <div className="col-md-6">
                   <div className="office">
@@ -151,23 +160,7 @@ class Create extends Component {
                       <div className="email">
                         <i className="fa fa-envelope"><span>imatom19@gmail.com</span></i>
                       </div>
-                      {/* <div id="map">
-                        <div>
-                          <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-                            <Marker onClick={this.onMarkerClick} name={'Now fill the form'} />
-                            <InfoWindow
-                              marker={this.state.activeMarker}
-                              visible={this.state.showingInfoWindow}
-                              onClose={this.onClose}
-                              style={{ backgroundColor:'#98dbc6'}}
-                            >
-                              <div>
-                                <h3 style={{ marginTop: '20%', color:'black' }} ><b>{this.state.selectedPlace.name}</b></h3>
-                              </div>
-                            </InfoWindow>
-                          </CurrentLocation>
-                        </div>
-                      </div> */}
+                     
                     </div>
                   </div>
                 </div>
@@ -177,7 +170,6 @@ class Create extends Component {
                       <h5>Drop A Message</h5>
                     </div>
                     <div className="form_area">
-                      {/* <!-- CONTACT FORM --> */}
                       <div className="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
                         <div id="message"></div>
                         <form action="scripts/contact.php" className="form-horizontal contact-1" name="contactform" id="contactform">
@@ -192,19 +184,7 @@ class Create extends Component {
                               <input type="text" className="form-control" value= {this.state.user.email} name="email" id="email" placeholder="EMAIL" />
                             </div>
                           </div>
-                          {/* <div className="row">
-                            <div className=" btn-group-justified" data-toggle="buttons">
-                              <label className="btn btn-success active">
-                                <input type="radio" name="options" id="name" autocomplete="off" defaultChecked /> Radio 1 (preselected)
-                              </label>
-                              <label className="btn btn-info">
-                                <input type="radio" name="options" id="name" autocomplete="off" /> Radio 2
-                              </label>
-                              <label className="btn btn-warning">
-                                <input type="radio" name="options" id="name" autocomplete="off" /> Radio 3
-                              </label>
-                            </div>          
-                          </div> */}
+                        
                           <div className="form-group">
                             <div className="col-sm-6">
                               {this.state.selectedPlace.mapCenter ? (<input type="text" className="form-control" value={this.state.selectedPlace.mapCenter.lat} name="lat" id="name" placeholder="LATTITUDE" />)
@@ -237,14 +217,13 @@ class Create extends Component {
                     </div>
                   </div>
                 </div>
-                {/* <!--End of col-md-6--> */}
+
               </div>
-              {/* <!--End of row--> */}
+
             </div>
-            {/* <!--End of container--> */}
           </section>
 
-        </div>
+        </div> */}
 
 
       </div>

@@ -74,8 +74,8 @@ class CuTube extends React.Component {
         // if (this.state.title) {
             var response = await Youtube.get('/search', {
                 params: {
-                    q: `${term}`
-                    // q: `${term} songs hindi and english songs`
+                    // q: term
+                    q: `${term} songs hindi and english songs`
                 }
             });
             this.setState({ 
@@ -156,7 +156,7 @@ class CuTube extends React.Component {
                                     </div>
 
                                 </div>) : (<div className='' id='not-show1'>
-                                    <iframe id="video-iframe" allowFullScreen="allowfullscreen" style={{ zIndex:'50', height: '350px', textAlign: 'center', width: '70%', marginTop: '2%', marginBottom: '2%' }} className="" title='video player' src={`https://www.youtube.com/embed/${this.state.vids[0].id.videoId}`} />
+                                    <iframe id="video-iframe" allowFullScreen="allowfullscreen" className="main-video-frame" title='video player' src={`https://www.youtube.com/embed/${this.state.vids[0].id.videoId}`} />
 
                                 </div>)}
 

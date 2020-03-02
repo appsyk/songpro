@@ -1,7 +1,11 @@
+// 'use strict';
+
 import React from 'react';
 
 import './Modules/homePage.css';
 import './Modules/LoadStyle.css';
+
+import backVid from './images/PexelsVid.mp4'
 // import SongProfo from './components/SongProfo';
 // import Helper from './components/Helper';
 // import SpinSearch from './Modules/SpinSearch';
@@ -20,41 +24,35 @@ import './Modules/LoadStyle.css';
 class HomePage extends React.Component {
     render() {
 
-        let notify = new Notification('Click on mic to give a command', {
-            body:'this is Javascript testing',
+        let notify = new Notification('Click on mic to give a command to SongPro', {
+            // body:'you can simply click on mic ic',
             icon: './images/not-found-pic.png'
-         } )
-         
-         if(window.Notification){
+        })
+
+        if (window.Notification) {
             Notification.requestPermission()
-               .then( function () {
-                  if(Notification.permission === 'granted'){
-                    return {notify}
-                  }
-               })
-            }
-         
-            setTimeout(() => {
-               notify.close();
-            }, 7000);
+                .then(function () {
+                    if (Notification.permission === 'granted') {
+                        return { notify }
+                    }
+                })
+        }
+
+        setTimeout(() => {
+            notify.close();
+        }, 7000);
 
         return (
             <div className=''>
-                <section id="mic-view">
-                    <div class="mic-area">
-                        {/* {this.micLogo()} */}
-                        {/* <div class="container">
-                            <div class="row">
-                                <a href="#" class="intro-banner-vdo-play-btn pinkBg" target="_blank">
-                                    <i class="glyphicon glyphicon-play whiteText" aria-hidden="true"></i>
-                                    <span class="ripple pinkBg"></span>
-                                    <span class="ripple pinkBg"></span>
-                                    <span class="ripple pinkBg"></span>
-                                </a>
-                            </div>
-                        </div> */}
-                    </div>
-                </section>
+                {/* <video autoplay muted loop id="myVideo">
+                    <source src={backVid} type="video/mp4" />
+                        Your browser does not support HTML5 video.
+                    </video> */}
+                    <section id="mic-view">
+                        <div class="mic-area">
+
+                        </div>
+                    </section>
                     {/* <section id="slider">
                         <div style={{ margin: '1%' }} id="carousel-example-generic" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3100">
                             <ol className="carousel-indicators">
