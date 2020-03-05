@@ -75,7 +75,7 @@ class CuTube extends React.Component {
             var response = await Youtube.get('/search', {
                 params: {
                     // q: term
-                    q: `${term} songs hindi and english songs`
+                    q: `feeling ${term} hindi and english songs`
                 }
             });
             this.setState({ 

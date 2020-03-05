@@ -5,7 +5,7 @@ import React from 'react';
 import './Modules/homePage.css';
 import './Modules/LoadStyle.css';
 
-import backVid from './images/PexelsVid.mp4'
+// import backVid from './images/PexelsVid.mp4';
 // import SongProfo from './components/SongProfo';
 // import Helper from './components/Helper';
 // import SpinSearch from './Modules/SpinSearch';
@@ -24,35 +24,35 @@ import backVid from './images/PexelsVid.mp4'
 class HomePage extends React.Component {
     render() {
 
-        let notify = new Notification('Click on mic to give a command to SongPro', {
-            // body:'you can simply click on mic ic',
-            icon: './images/not-found-pic.png'
-        })
+        // let notify = new Notification('Click on mic to give a command to SongPro', {
+        //     // body:'you can simply click on mic ic',
+        //     icon: './images/not-found-pic.png'
+        // })
 
-        if (window.Notification) {
-            Notification.requestPermission()
-                .then(function () {
-                    if (Notification.permission === 'granted') {
-                        return { notify }
-                    }
-                })
-        }
+        // if (window.Notification) {
+        //     Notification.requestPermission()
+        //         .then(function () {
+        //             if (Notification.permission === 'granted') {
+        //                 return { notify }
+        //             }
+        //         })
+        // }
 
-        setTimeout(() => {
-            notify.close();
-        }, 7000);
+        // setTimeout(() => {
+        //     notify.close();
+        // }, 7000);
 
         return (
             <div className=''>
                 {/* <video autoplay muted loop id="myVideo">
                     <source src={backVid} type="video/mp4" />
                         Your browser does not support HTML5 video.
-                    </video> */}
+                    </video>
                     <section id="mic-view">
-                        <div class="mic-area">
+                        <div className="mic-area">
 
                         </div>
-                    </section>
+                    </section> */}
                     {/* <section id="slider">
                         <div style={{ margin: '1%' }} id="carousel-example-generic" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3100">
                             <ol className="carousel-indicators">

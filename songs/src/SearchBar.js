@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
     spin: false,
     spn: false,
     listening: false,
-    // autoFoc: false
+    autoFoc: false
   };
   //-----------------------------------------------------------------
 
@@ -65,10 +65,57 @@ class SearchBar extends React.Component {
       }
       // document.getElementById('interim').innerHTML = interimTranscript
       // document.getElementById('final').innerHTML = finalTranscript
-      console.log('Final Text', finalTranscript, "-----", interimTranscript)
-      this.setState({
-        term: finalTranscript
-      })
+      // console.log('Final Text', finalTranscript, "-----", interimTranscript)
+      // this.setState({
+      //   term: finalTranscript
+      // })
+
+      var moodArray = [
+
+        // positive
+
+        'amused', 'blissful', 'calm', 'cheerful', 'content', 'dreamy', 'ecstatic', 'energetic', 'excited',
+
+        'flirty', 'giddy', 'good', 'happy', 'joyful', 'loving', 'mellow', 'optimistic', 'peaceful', 'silly', 'sympathetic',
+
+        // negative
+
+        'angry', 'annoyed', 'apathetic', 'bad', 'cranky', 'depressed', 'envious', 'frustrated', 'gloomy', 'grumpy', 'guilty',
+
+        'indifferent', 'irritated', 'melancholy', 'pessimistic', 'rejected', 'restless', 'sad', 'stressed', 'weird'
+
+      ];
+
+      // console.log(moodArray)
+
+      for (let mod = 0; mod< moodArray.length; mod++){
+
+        // console.log(moodArray[mod])
+
+        // debugger;
+
+        if((interimTranscript === moodArray[mod]) || interimTranscript === `'feeling' ${moodArray[mod]}` ){
+
+        console.log(12345,interimTranscript,'---',moodArray[mod])
+        console.log('Final Text', finalTranscript, "-----", interimTranscript)
+
+        this.setState({
+
+          term: interimTranscript,
+          autoFoc: true
+        })
+
+      }}
+
+      // }
+
+      //   else{
+
+      //     console.log(finalTranscript,'---',moodArray[mod])
+
+      //   }
+
+      // }
 
       //-------------------------COMMANDS------------------------------------
 
@@ -132,11 +179,11 @@ class SearchBar extends React.Component {
     }
     return (
       <div onClick={this.toggleListen}>
-        <span class="intro-banner-vdo-play-btn pinkBg" target="_blank">
-          <i class="fa fa-microphone" style={micStyle} aria-hidden="true"></i>
-          <span class="ripple pinkBg"></span>
-          <span class="ripple pinkBg"></span>
-          <span class="ripple pinkBg"></span>
+        <span className="intro-banner-vdo-play-btn pinkBg" target="_blank">
+          <i className="fa fa-microphone" style={micStyle} aria-hidden="true"></i>
+          <span className="ripple pinkBg"></span>
+          <span className="ripple pinkBg"></span>
+          <span className="ripple pinkBg"></span>
         </span>
       </div>
     );
@@ -160,8 +207,8 @@ class SearchBar extends React.Component {
             <i className="fa fa-music fa-3x" style={{ textShadow: '4px 4px 4px rgb(0, 0, 0)', color: 'rgb(2, 203, 252)' }}></i>
             <a href='/'><h2 className="filmIn logoName logo-nm-ad" style={{ color: '#02CBFC', marginTop: '2vh' }} >SongPro</h2></a>
 
-            <button class="mic-btn" style={{ display: 'none' }} id="mic-btn-id" onClick={this.toggleListen}>
-              <i class="fa fa-microphone" style={{ color: 'black' }} title="Activate Mic" aria-hidden="true"></i>
+            <button className="mic-btn" style={{ display: 'none' }} id="mic-btn-id" onClick={this.toggleListen}>
+              <i className="fa fa-microphone" style={{ color: 'black' }} title="Activate Mic" aria-hidden="true"></i>
             </button>
 
             <form className="form-inline, searchBar myHomefont" onSubmit={this.onSubmitHandle}>
@@ -174,7 +221,7 @@ class SearchBar extends React.Component {
                 aria-label="Search"
                 list="search"
                 autoComplete="on"
-                autoFocus={this.state.term ? true : false}
+                autoFocus={this.state.autoFoc}
             />
              {/* ) : (<input className="form-control mr-sm-4 col-sm-12"
               type='search'

@@ -3,9 +3,7 @@ import './Modules/card.css';
 import { Route, BrowserRouter } from 'react-router-dom';
 // import FilmIn from './components/App';
 import CuTube from './Cutube';
-import App1 from './reserveForm/App';
-import App2 from './reserveForm/Show';
-import App3 from './reserveForm/Create';
+
 // import SearchBar from './SearchBar';
 // import FilmInfo from './components/FilmInfo';
 
