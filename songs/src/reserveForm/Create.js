@@ -9,14 +9,7 @@ class Create extends Component {
     this.ref = firebase.firestore().collection('rents');
     this.state = {
       userName:'',
-      // firstName: '',
-      // lastName: '',
-      email: '',
-      // lat: '',
-      // noOfSpaces: '',
-      // lng: '',
-      // address: '',
-      // describe: ''
+      email: ''
     };
   }
   onChange = (e) => {
@@ -28,32 +21,14 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { userName,
-      // firstName, lastName, 
-      email, 
-      // lat,
-      // noOfSpaces, lng, address, describe 
-    } = this.state;
+    const { userName, email } = this.state;
 
-    this.ref.add({
-      userName,
-      email,
-      // lastName, 
-        // lat,
-      // noOfSpaces, lng, address, describe
-
-    }).then((docRef) => {
+    this.ref.add({ userName, email }).then((docRef) => {
       this.setState({
         userName: '',
-        // lastName: '',
-        email: '',
-        // lat: '',
-        // noOfSpaces: '',
-        // lng: '',
-        // address: '',
-        // describe: ''
+        email: ''
       });
-      this.props.history.push("/")
+      this.props.history.push("/liked")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -61,11 +36,7 @@ class Create extends Component {
   }
 
   render() {
-    const { userName,
-      //  parkingPlace, vehicleName, vehicleNumber,
-       email,
-        // phoneNumber, arrivingTime, leavingTime 
-      } = this.state;
+    const { userName, email } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">
@@ -75,7 +46,7 @@ class Create extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <h4><Link to="/" className="btn btn-primary">Book List</Link></h4>
+            <h4><Link to="/liked" className="btn btn-primary">Book List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="userName">Username:</label>

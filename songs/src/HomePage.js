@@ -47,12 +47,12 @@ class HomePage extends React.Component {
                 {/* <video autoplay muted loop id="myVideo">
                     <source src={backVid} type="video/mp4" />
                         Your browser does not support HTML5 video.
-                    </video>
+                    </video> */}
                     <section id="mic-view">
                         <div className="mic-area">
 
                         </div>
-                    </section> */}
+                    </section>
                     {/* <section id="slider">
                         <div style={{ margin: '1%' }} id="carousel-example-generic" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3100">
                             <ol className="carousel-indicators">

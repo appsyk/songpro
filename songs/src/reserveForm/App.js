@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import firebase from './Firebase';
 
 class ResForm extends Component {
+  
   constructor(props) {
     super(props);
     this.ref = firebase.firestore().collection('rents');

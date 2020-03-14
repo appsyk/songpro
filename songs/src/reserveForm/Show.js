@@ -32,7 +32,7 @@ class Show extends Component {
     firebase.firestore().collection('rents').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
       alert("Document successfully deleted!");
-      this.props.history.push("/")
+      this.props.history.push("/liked")
     }).catch((error) => {
       console.error("Error removing document: ", error);
       alert("Error removing document: ", error);

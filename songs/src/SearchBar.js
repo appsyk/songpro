@@ -1,14 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+// import FirebaseIntegrate from './FirebaseIntegrate';
+import Speech from 'react-speech';
+// import responsiveVoice from 'responsivevoice';
+
+const retreiveUser = localStorage.getItem('userNm')
 
 const SpeechRecognition = window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition()
 
+
 recognition.continous = true
 recognition.interimResults = true
 // recognition.lang = 'en-US'
+// SpeechRecognition.continous = true
 
 
 //------------------------COMPONENT-----------------------------
+
 
 class SearchBar extends React.Component {
 
@@ -17,9 +26,61 @@ class SearchBar extends React.Component {
     spin: false,
     spn: false,
     listening: false,
-    autoFoc: false
+    autoFoc: false,
+    IsOnline: true
   };
+
+
   //-----------------------------------------------------------------
+
+
+  getUserInfo() {
+
+    console.log('this.getUserInfo', retreiveUser)
+
+    if (!retreiveUser) {
+
+      var msg = new SpeechSynthesisUtterance('Jarvis want to know your name');
+      msg.volume = 1;
+      msg.rate = 1;
+      msg.pitch = 0.8;
+      msg.lang = 'en-US';
+      window.speechSynthesis.speak(msg);
+
+      var IniVal = prompt("Jarvis want to know your name : ", "your name here...");
+      var userVal = IniVal.toLocaleLowerCase();
+
+      if (userVal) {
+        console.log(userVal)
+        let user = localStorage.setItem('userNm', `${userVal}`)
+        var msg = new SpeechSynthesisUtterance(`Hello.....${userVal}
+        Welcome in .....Song Pro...............................
+        Now click on the Mic ........and tell me what you want to watch today.`);
+        msg.volume = 1;
+        msg.rate = 1;
+        msg.pitch = 0.8;
+        msg.lang = 'en-US';
+        window.speechSynthesis.speak(msg);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+
+      } else {
+        console.log('user not filled their name.')
+      }
+    }
+  }
+
+  checkUser() {
+    var msg = new SpeechSynthesisUtterance(`Hello.....${retreiveUser}
+      Welcome again...............................
+      Now click on the Mic........ and tell me what you want to watch..... today.`);
+    msg.volume = 1;
+    msg.rate = 1;
+    msg.pitch = 0.8;
+    msg.lang = 'en-UK';
+    window.speechSynthesis.speak(msg);
+  }
 
   toggleListen = () => {
     this.setState({
@@ -51,6 +112,7 @@ class SearchBar extends React.Component {
     }
 
     recognition.onstart = () => {
+
       console.log("Listening!")
     }
 
@@ -63,12 +125,6 @@ class SearchBar extends React.Component {
         if (event.results[i].isFinal) finalTranscript += transcript + ' ';
         else interimTranscript += transcript;
       }
-      // document.getElementById('interim').innerHTML = interimTranscript
-      // document.getElementById('final').innerHTML = finalTranscript
-      // console.log('Final Text', finalTranscript, "-----", interimTranscript)
-      // this.setState({
-      //   term: finalTranscript
-      // })
 
       var moodArray = [
 
@@ -86,36 +142,21 @@ class SearchBar extends React.Component {
 
       ];
 
-      // console.log(moodArray)
+      for (let mod = 0; mod < moodArray.length; mod++) {
 
-      for (let mod = 0; mod< moodArray.length; mod++){
+        if ((interimTranscript === moodArray[mod]) || interimTranscript === `'feeling' ${moodArray[mod]}`) {
 
-        // console.log(moodArray[mod])
+          console.log(12345, interimTranscript, '---', moodArray[mod])
+          console.log('Final Text', finalTranscript, "-----", interimTranscript)
 
-        // debugger;
+          this.setState({
 
-        if((interimTranscript === moodArray[mod]) || interimTranscript === `'feeling' ${moodArray[mod]}` ){
+            term: interimTranscript,
+            autoFoc: true
+          })
 
-        console.log(12345,interimTranscript,'---',moodArray[mod])
-        console.log('Final Text', finalTranscript, "-----", interimTranscript)
-
-        this.setState({
-
-          term: interimTranscript,
-          autoFoc: true
-        })
-
-      }}
-
-      // }
-
-      //   else{
-
-      //     console.log(finalTranscript,'---',moodArray[mod])
-
-      //   }
-
-      // }
+        }
+      }
 
       //-------------------------COMMANDS------------------------------------
 
@@ -126,9 +167,11 @@ class SearchBar extends React.Component {
       if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
         recognition.stop()
         recognition.onend = () => {
+          let notify = new Notification("Stopped listening per command");
           console.log('Stopped listening per command')
           const finalText = transcriptArr.slice(0, -3).join(' ')
           document.getElementById('final').innerHTML = finalText
+          return { notify }
 
         }
       }
@@ -137,7 +180,9 @@ class SearchBar extends React.Component {
     //-----------------------------------------------------------------------
 
     recognition.onerror = event => {
+      let notify = new Notification("Error occurred in recognition: " + event.error)
       console.log("Error occurred in recognition: " + event.error)
+      return { notify }
     }
 
   }
@@ -151,6 +196,10 @@ class SearchBar extends React.Component {
       document.querySelector('.mic-style').style.display = 'none';
       document.querySelector('.mic-btn').style.cssText = "display: 'block'; transition: 1s ease-out";
     }, 1000);
+    if (!navigator.onLine) {
+      let notify = alert("Your Device is not connected to internet.");
+      return notify;
+    }
 
   }
 
@@ -174,7 +223,6 @@ class SearchBar extends React.Component {
 
   micLogo() {
     const micStyle = {
-      textShadow: '4px 4px 4px rgb(0, 10, 42)',
       color: 'black'
     }
     return (
@@ -189,51 +237,51 @@ class SearchBar extends React.Component {
     );
   }
 
+
+
+  userVoice = (retreiveUser) => {
+    if (retreiveUser) {
+      console.log('user voice', retreiveUser)
+      return <div>{this.checkUser()}</div>;
+    } else {
+      console.log('user get', retreiveUser)
+      return <div>{this.getUserInfo()}</div>;
+    }
+  }
   render(props) {
-
-    // if(this.state.term){
-    //   const autO = true;
-    // }
-
-    // document.querySelector('clickid').autoFocus;
-    console.log(this.state.autoFoc)
-
 
     return (
 
       <div>
+        <div id='voice-id'>
+          {this.getUserInfo()}
+          {/* {this.userVoice()} */}
+        </div>
         <nav className="navbar navbar-expand-md navbar-dark navbar-fixed-top bg-dark, navBackColor ">
           <div className="container">
-            <i className="fa fa-music fa-3x" style={{ textShadow: '4px 4px 4px rgb(0, 0, 0)', color: 'rgb(2, 203, 252)' }}></i>
-            <a href='/'><h2 className="filmIn logoName logo-nm-ad" style={{ color: '#02CBFC', marginTop: '2vh' }} >SongPro</h2></a>
+
+            <a href='/' className="logo-style"><i className="fa fa-music fa-3x" style={{ margin: '5px' }}></i>
+              <h2 className="filmIn logoName logo-nm-ad" style={{ marginTop: '2vh' }} >SongPro</h2></a>
 
             <button className="mic-btn" style={{ display: 'none' }} id="mic-btn-id" onClick={this.toggleListen}>
               <i className="fa fa-microphone" style={{ color: 'black' }} title="Activate Mic" aria-hidden="true"></i>
             </button>
 
+            <Link to='/liked' >
+              <i className="fa fa-heart fa-2x nav-like-btn" style={{ color: 'red', margin: '12px' }} title="Liked List" aria-hidden="true"></i>
+            </Link>
             <form className="form-inline, searchBar myHomefont" onSubmit={this.onSubmitHandle}>
-            {/* {this.state.term ? ( */}
-            <input className="form-control mr-sm-4 col-sm-12"
+              <input className="form-control mr-sm-4 col-sm-12"
                 type='search'
                 onChange={e => { this.setState({ term: e.target.value }) }}
                 value={this.state.term}
-                placeholder='Search for songs ....'
+                placeholder='Search for songs....'
                 aria-label="Search"
                 list="search"
                 autoComplete="on"
                 autoFocus={this.state.autoFoc}
-            />
-             {/* ) : (<input className="form-control mr-sm-4 col-sm-12"
-              type='search'
-              onChange={e => { this.setState({ term: e.target.value }) }}
-              value={this.state.term}
-              placeholder='Search for songs ....'
-              aria-label="Search"
-              list="search"
-              autoComplete="on"
-              autoFocus="flase"
-            />)} */}
-              
+              />
+
             </form>
 
             <div className="myHomefont" style={{ marginLeft: '0.5%' }}>
@@ -243,7 +291,7 @@ class SearchBar extends React.Component {
                   </div>
                 </div>) : (<div className='offspin'><i style={{ color: 'white' }} className="fa fa-search fa-2x float-right" onClick={this.onSubmitHandle} aria-hidden="true"></i></div>)}
             </div>
-
+            <h4 className="username-style" title='Logout' type='button' onClick={() => { localStorage.removeItem('userNm'); window.location.reload(); }}>{retreiveUser}</h4>
           </div>
 
         </nav><br /><br />
