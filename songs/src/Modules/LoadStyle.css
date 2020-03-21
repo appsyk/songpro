@@ -62,10 +62,16 @@
 }
 
 
-.pinkBg {
+.blueBg {
     background-color: rgb(2, 203, 252) !important;
     background-image: linear-gradient(to right, #0bd4a9, #25c1ff);
 }
+
+.pinkBg {
+  background-color: #f3a6d9 !important;
+  /* background-image: linear-gradient(to right, #da7d89, #be4a9c); */
+}
+
 .intro-banner-vdo-play-btn{
     height:60px;
     width:60px;

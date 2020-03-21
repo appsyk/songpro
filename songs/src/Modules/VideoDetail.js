@@ -18,19 +18,19 @@ const VideoDetail = ({ video }) => {
 
     const likeBtn = () => {
 
-        console.log('for fire', video)
-
         var like = parseInt(localStorage.getItem("like"))
-
+        console.log('1st',localStorage.getItem("like"))
         {
             localStorage.getItem("like") ? (localStorage.setItem("like", like += 1))
-                : (localStorage.setItem("like", 0))
+                : (localStorage.setItem("like", 1))
         }
+        console.log('2nd',localStorage.getItem("like"))
         var timeed = new Date();
+        var like = parseInt(localStorage.getItem("like"))
 
-        var data = [video, timeed, userNm, `${like}liked` ]
-        localStorage.setItem(`${like}liked`, JSON.stringify(data));
-        var test = JSON.parse(localStorage.getItem(`${like}liked`));
+        var data = [video, timeed, userNm, `liked${like}` ]
+        localStorage.setItem(`liked${like}`, JSON.stringify(data));
+        var test = JSON.parse(localStorage.getItem(`liked${like}`));
         console.log('from localstorage',test)
         let notify = new Notification(`You liked ${video.snippet.title}`);
 

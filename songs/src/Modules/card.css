@@ -1,9 +1,11 @@
 body{
   /* background: url(../images/bg-image.jpg); */
-  background: url(../images/bg-image.jpg);
+  background: url(../images/music-bg-img.jpg);
     background-repeat: no-repeat;
-    background-position: top;
+    background-position: right;
     background-attachment: fixed;
+    background-size: cover;
+    /* background-size: 100vh 100vw; */
 }
 
 /* 
@@ -69,7 +71,7 @@ z-index: 1;
   /* transform: rotateY(180deg);
   z-index: 1; */
   /* transform: scale(1.2); */
-  /* animation: up-down-icon-anime .5s ease-out; */
+  /* animation: up-down-icon .5s ease-out; */
 }
 
 .invert{
@@ -207,9 +209,14 @@ modal-header .close {
   transform: scale(1.2);
   animation: like-btn-anime 0.3s ease-out;
 } */
+.nav-like-btn{
+  color: red;
+  margin: 12px; 
+}
 .nav-like-btn:hover{
   transform: scale(1.2);
-  animation: like-btn-anime 0.3s ease-out;
+  color: rgb(255, 82, 82);
+  animation: like-btn-anime 0.4s ease-out;
 }
 .like-btn{
   padding: 3rem 1rem 0 0 !important;
@@ -224,6 +231,9 @@ modal-header .close {
 @keyframes like-btn-anime{
   0%{
     transform: scale(1);
+  }
+  80%{
+    transform: scale(1.5);
   }
   100%{
     transform: scale(1.2);
@@ -281,7 +291,7 @@ vertical-align: middle;
     .searchBar {
       width: 40%;
       padding: 0;
-      margin-left: 40%;
+      margin-left: 30%;
     }
     .spin {
       width: 1000px;

@@ -5,24 +5,26 @@ import React from 'react';
 import './Modules/homePage.css';
 import './Modules/LoadStyle.css';
 
-// import backVid from './images/PexelsVid.mp4';
+import backVid from './images/PexelsVid.mp4';
 // import SongProfo from './components/SongProfo';
-// import Helper from './components/Helper';
-// import SpinSearch from './Modules/SpinSearch';
+import Helper from './components/Helper';
+import SpinSearch from './Modules/SpinSearch';
+import sanjuAvatar from './images/sanju-avatar1.jpg'
 
-// import image1 from './images/avatar.jpg';
-// import image2 from './images/ironman.jpg';
-// import image3 from './images/wonderwoman.jpg';
-// import image4 from './images/avengers.jpg';
-// import image5 from './images/farzand.jpg';
-// import image6 from './images/300.jpg';
-// import image7 from './images/bahubali.jpg';
-// import image8 from './images/bumblebee.jpg';
+import image1 from './images/avatar.jpg';
+import image2 from './images/ironman.jpg';
+import image3 from './images/wonderwoman.jpg';
+import image4 from './images/avengers.jpg';
+import image5 from './images/farzand.jpg';
+import image6 from './images/300.jpg';
+import image7 from './images/bahubali.jpg';
+import image8 from './images/bumblebee.jpg';
 
 // import SearchBar from './SearchBar';
 
 class HomePage extends React.Component {
     render() {
+
 
         // let notify = new Notification('Click on mic to give a command to SongPro', {
         //     // body:'you can simply click on mic ic',
@@ -48,12 +50,31 @@ class HomePage extends React.Component {
                     <source src={backVid} type="video/mp4" />
                         Your browser does not support HTML5 video.
                     </video> */}
-                    <section id="mic-view">
-                        <div className="mic-area">
+                <section id="mic-view">
+                    <div className="mic-area">
 
+                    </div>
+                </section>
+                <section class='' >
+                    <div class='team-title'>
+                        <p>Team Members</p>
+                    </div>
+                    <div id='team-section' class='row justify-content-center'>
+                        <div class='team-cards'>
+                            <img class='mem-avatar' src={sanjuAvatar} />
+                            <p class='team-content'>Priyanka</p>
                         </div>
-                    </section>
-                    {/* <section id="slider">
+                        <div class='team-cards'>
+                        <img class='mem-avatar' src={sanjuAvatar} />
+                            <p class='team-content'>Sonal</p>
+                        </div>
+                        <div class='team-cards'>
+                        <img class='mem-avatar' src={sanjuAvatar} />
+                            <p class='team-content'>Shital</p>
+                        </div>
+                    </div>
+                </section>
+                <section id="slider container">
                         <div style={{ margin: '1%' }} id="carousel-example-generic" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3100">
                             <ol className="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
@@ -161,11 +182,11 @@ class HomePage extends React.Component {
                         <div>
                             <Helper />
                         </div>
-                    </section> */}
+                    </section>
 
             </div>
-                );
-            }
-        
-        }
-        export default HomePage;
+        );
+    }
+
+}
+export default HomePage;

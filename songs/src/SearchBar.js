@@ -36,8 +36,6 @@ class SearchBar extends React.Component {
 
   getUserInfo() {
 
-    console.log('this.getUserInfo', retreiveUser)
-
     if (!retreiveUser) {
 
       var msg = new SpeechSynthesisUtterance('Jarvis want to know your name');
@@ -48,9 +46,9 @@ class SearchBar extends React.Component {
       window.speechSynthesis.speak(msg);
 
       var IniVal = prompt("Jarvis want to know your name : ", "your name here...");
-      var userVal = IniVal.toLocaleLowerCase();
 
-      if (userVal) {
+      if (IniVal) {
+        var userVal = IniVal.toLocaleLowerCase();
         console.log(userVal)
         let user = localStorage.setItem('userNm', `${userVal}`)
         var msg = new SpeechSynthesisUtterance(`Hello.....${userVal}
@@ -66,7 +64,7 @@ class SearchBar extends React.Component {
         }, 2000);
 
       } else {
-        console.log('user not filled their name.')
+        let notify = new Notification('user not filled their name.')
       }
     }
   }
@@ -112,7 +110,6 @@ class SearchBar extends React.Component {
     }
 
     recognition.onstart = () => {
-
       console.log("Listening!")
     }
 
@@ -167,11 +164,11 @@ class SearchBar extends React.Component {
       if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
         recognition.stop()
         recognition.onend = () => {
-          let notify = new Notification("Stopped listening per command");
+          // let notify = new Notification("Stopped listening per command");
           console.log('Stopped listening per command')
           const finalText = transcriptArr.slice(0, -3).join(' ')
           document.getElementById('final').innerHTML = finalText
-          return { notify }
+          // return { notify }
 
         }
       }
@@ -180,9 +177,9 @@ class SearchBar extends React.Component {
     //-----------------------------------------------------------------------
 
     recognition.onerror = event => {
-      let notify = new Notification("Error occurred in recognition: " + event.error)
+      // let notify = new Notification("Error occurred in recognition: " + event.error)
       console.log("Error occurred in recognition: " + event.error)
-      return { notify }
+      // return { notify }
     }
 
   }
@@ -221,21 +218,21 @@ class SearchBar extends React.Component {
     }
   }
 
-  micLogo() {
-    const micStyle = {
-      color: 'black'
-    }
-    return (
-      <div onClick={this.toggleListen}>
-        <span className="intro-banner-vdo-play-btn pinkBg" target="_blank">
-          <i className="fa fa-microphone" style={micStyle} aria-hidden="true"></i>
-          <span className="ripple pinkBg"></span>
-          <span className="ripple pinkBg"></span>
-          <span className="ripple pinkBg"></span>
-        </span>
-      </div>
-    );
-  }
+  // micLogo() {
+  //   const micStyle = {
+  //     listzz
+  //   }
+  //   return (
+  //     <div onClick={this.toggleListen}>
+  //       <span className="intro-banner-vdo-play-btn pinkBg" target="_blank">
+  //         <i className="fa fa-microphone" style={{ color: 'black' }} aria-hidden="true"></i>
+  //         <span className="ripple pinkBg"></span>
+  //         <span className="ripple pinkBg"></span>
+  //         <span className="ripple pinkBg"></span>
+  //       </span>
+  //     </div>
+  //   );
+  // }
 
 
 
@@ -248,8 +245,15 @@ class SearchBar extends React.Component {
       return <div>{this.getUserInfo()}</div>;
     }
   }
-  render(props) {
 
+  componentDidUpdate() {
+    if (this.state.term !== null) {
+      // document.querySelector('#search-id').focus();
+    }
+  }
+
+  render(props) {
+    
     return (
 
       <div>
@@ -263,12 +267,16 @@ class SearchBar extends React.Component {
             <a href='/' className="logo-style"><i className="fa fa-music fa-3x" style={{ margin: '5px' }}></i>
               <h2 className="filmIn logoName logo-nm-ad" style={{ marginTop: '2vh' }} >SongPro</h2></a>
 
-            <button className="mic-btn" style={{ display: 'none' }} id="mic-btn-id" onClick={this.toggleListen}>
-              <i className="fa fa-microphone" style={{ color: 'black' }} title="Activate Mic" aria-hidden="true"></i>
+            <button className="mic-btn" 
+            style={{ display: 'none' }} 
+            id="" onClick={this.toggleListen}>
+              {this.state.listening === false ? 
+              (<i className="fa fa-microphone-slash" style={{ color: 'black' }} title="Mic On" aria-hidden="true"></i>)
+              :(<i className="fa fa-microphone" style={{ color: 'red' }} title="Mic Off" aria-hidden="true"></i>)}
             </button>
 
             <Link to='/liked' >
-              <i className="fa fa-heart fa-2x nav-like-btn" style={{ color: 'red', margin: '12px' }} title="Liked List" aria-hidden="true"></i>
+              <i className="fa fa-heart fa-2x nav-like-btn" title="Liked List" aria-hidden="true"></i>
             </Link>
             <form className="form-inline, searchBar myHomefont" onSubmit={this.onSubmitHandle}>
               <input className="form-control mr-sm-4 col-sm-12"
@@ -279,7 +287,8 @@ class SearchBar extends React.Component {
                 aria-label="Search"
                 list="search"
                 autoComplete="on"
-                autoFocus={this.state.autoFoc}
+                autoFocus={false}
+                id='search-id'
               />
 
             </form>
@@ -289,14 +298,28 @@ class SearchBar extends React.Component {
                 ? (<div className="clearfix">
                   <div className="spinner-border text-light float-right" role="status">
                   </div>
-                </div>) : (<div className='offspin'><i style={{ color: 'white' }} className="fa fa-search fa-2x float-right" onClick={this.onSubmitHandle} aria-hidden="true"></i></div>)}
+                </div>) : (<div className='offspin'><i style={{ color: 'white' }} className="fa fa-search fa-2x float-right" disabled onClick={this.onSubmitHandle} aria-hidden="true"></i></div>)}
             </div>
             <h4 className="username-style" title='Logout' type='button' onClick={() => { localStorage.removeItem('userNm'); window.location.reload(); }}>{retreiveUser}</h4>
           </div>
 
         </nav><br /><br />
         <div className="mic-style">
-          {this.micLogo()}
+          {/* {this.micLogo()} */}
+          <div onClick={this.toggleListen}>
+            {this.state.listening === false ? (<span className="intro-banner-vdo-play-btn blueBg" target="_blank">
+              <i className="fa fa-microphone-slash" style={{ color: '#53251f' }} aria-hidden="true"></i>
+              <span className="ripple blueBg"></span>
+              <span className="ripple blueBg"></span>
+              <span className="ripple blueBg"></span>
+            </span>) : (<span className="intro-banner-vdo-play-btn pinkBg" target="_blank">
+              <i className="fa fa-microphone" style={{ color: 'black' }} aria-hidden="true"></i>
+              <span className="ripple pinkBg"></span>
+              <span className="ripple pinkBg"></span>
+              <span className="ripple pinkBg"></span>
+            </span>) }
+            
+          </div>
         </div>
       </div>
     );
@@ -304,3 +327,5 @@ class SearchBar extends React.Component {
 }
 
 export default SearchBar;
+
+

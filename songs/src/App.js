@@ -17,9 +17,9 @@ import FirebaseIntegrate from './FirebaseIntegrate';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div id='home123'>
         <BrowserRouter>
-          <div>
+          <div id='home'>
             <Route exact path='/' component={CuTube} />
             {/* <Route path='/liked' component={ResForm} /> */}
             <Route path='/liked' component={FirebaseIntegrate} />

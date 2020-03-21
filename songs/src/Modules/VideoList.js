@@ -12,7 +12,7 @@ const VideoList = ({ vidList, onSelectVid }) => {
         
     });
         return(
-            <div>
+            <div id='youtube-result-row' className='row justify-content-center'>
                 {rendList}
                 {/* <VidRender firstVid={firstVid} /> */}
             </div>

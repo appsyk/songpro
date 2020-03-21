@@ -32,16 +32,16 @@ class CuTube extends React.Component {
             params: { query: term },
         });
 
-            var response = await Youtube.get('/search', {
-                params: {
-                    q: `feeling ${term} hindi and english songs`
-                }
-            });
-            console.log('checking response type for an error',response)
-            this.setState({ 
-                vids: response.data.items,
-                response: response1.data.Response,
-            })
+        var response = await Youtube.get('/search', {
+            params: {
+                q: `feeling ${term} hindi and english songs`
+            }
+        });
+        console.log('checking response type for an error', response)
+        this.setState({
+            vids: response.data.items,
+            response: response1.data.Response,
+        })
 
     };
     onVidSelect = (video) => {
@@ -52,7 +52,7 @@ class CuTube extends React.Component {
 
         return (
 
-            <div className="container" >
+            <div className="" >
                 <div className="maincomp">
 
                     <SearchBar onFormSubmitProp={this.onTermSubmit} spinStop={this.state.response} />
@@ -60,8 +60,8 @@ class CuTube extends React.Component {
                         <div className='' >
                             <div className=''>
                                 <div><VideoDetail video={this.state.selectedVid} /></div>
-                                {this.state.vids[0] === undefined ? (<div id='not-show1' style={{textAlign:'center'}} className='' >
-                                    <div className="spinner-border" style={{ color: 'white', textAlign:'center', width: '10rem', height: '10rem', fontSize: '30px', marginTop: '15%'}} role="status">
+                                {this.state.vids[0] === undefined ? (<div id='not-show1' style={{ textAlign: 'center' }} className='' >
+                                    <div className="spinner-border" style={{ color: 'white', textAlign: 'center', width: '10rem', height: '10rem', fontSize: '30px', marginTop: '15%' }} role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div>
 
@@ -72,8 +72,7 @@ class CuTube extends React.Component {
 
                                 <div className='container' id='not-show2'>
                                     <h3 style={{ color: 'white' }}>Related Videos:</h3>
-                                    <VideoList onSelectVid={this.onVidSelect} vidList={this.state.vids} key={this.state.vids} />
-
+                                        <VideoList onSelectVid={this.onVidSelect} vidList={this.state.vids} key={this.state.vids} />
                                 </div>
 
                                 <SpinSearch />
