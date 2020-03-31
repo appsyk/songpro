@@ -5,7 +5,6 @@ import React from 'react';
 import './Modules/homePage.css';
 import './Modules/LoadStyle.css';
 
-import backVid from './images/PexelsVid.mp4';
 // import SongProfo from './components/SongProfo';
 import Helper from './components/Helper';
 import SpinSearch from './Modules/SpinSearch';
@@ -61,15 +60,15 @@ class HomePage extends React.Component {
                     </div>
                     <div id='team-section' class='row justify-content-center'>
                         <div class='team-cards'>
-                            <img class='mem-avatar' src={sanjuAvatar} />
+                            <img class='mem-avatar' alt='avatar' src={sanjuAvatar} />
                             <p class='team-content'>Priyanka</p>
                         </div>
                         <div class='team-cards'>
-                        <img class='mem-avatar' src={sanjuAvatar} />
+                        <img class='mem-avatar' alt='avatar' src={sanjuAvatar} />
                             <p class='team-content'>Sonal</p>
                         </div>
                         <div class='team-cards'>
-                        <img class='mem-avatar' src={sanjuAvatar} />
+                        <img class='mem-avatar' alt='avatar' src={sanjuAvatar} />
                             <p class='team-content'>Shital</p>
                         </div>
                     </div>

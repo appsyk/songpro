@@ -37,6 +37,29 @@ class CuTube extends React.Component {
                 q: `feeling ${term} hindi and english songs`
             }
         });
+        if (response.status === 200) {
+            var msg = new SpeechSynthesisUtterance(`Your result is ready`);
+            msg.volume = 1;
+            msg.rate = 1;
+            msg.pitch = 0.8;
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }else if(response.status === 404){
+            var msg = new SpeechSynthesisUtterance(`No results found.........sorry`);
+            msg.volume = 1;
+            msg.rate = 1;
+            msg.pitch = 0.8;
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+        else{
+            var msg = new SpeechSynthesisUtterance(`We are preparing your result.`);
+            msg.volume = 1;
+            msg.rate = 1;
+            msg.pitch = 0.8;
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
         console.log('checking response type for an error', response)
         this.setState({
             vids: response.data.items,
@@ -47,6 +70,7 @@ class CuTube extends React.Component {
     onVidSelect = (video) => {
         this.setState({ selectedVid: video });
     }
+
 
     render() {
 
@@ -72,7 +96,7 @@ class CuTube extends React.Component {
 
                                 <div className='container' id='not-show2'>
                                     <h3 style={{ color: 'white' }}>Related Videos:</h3>
-                                        <VideoList onSelectVid={this.onVidSelect} vidList={this.state.vids} key={this.state.vids} />
+                                    <VideoList onSelectVid={this.onVidSelect} vidList={this.state.vids} key={this.state.vids} />
                                 </div>
 
                                 <SpinSearch />

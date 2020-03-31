@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import firebase from '../reserveForm/Firebase';
-import { Link } from 'react-router-dom';
+import React from 'react';
+// import firebase from '../reserveForm/Firebase';
+// import { Link } from 'react-router-dom';
 
 const VideoDetail = ({ video }) => {
     if (!video) {
@@ -32,7 +32,7 @@ const VideoDetail = ({ video }) => {
         localStorage.setItem(`liked${like}`, JSON.stringify(data));
         var test = JSON.parse(localStorage.getItem(`liked${like}`));
         console.log('from localstorage',test)
-        let notify = new Notification(`You liked ${video.snippet.title}`);
+        // let notify = new Notification(`You liked ${video.snippet.title}`);
 
         document.querySelector('.like-btn').style.display = 'none';
 

@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import FirebaseIntegrate from './FirebaseIntegrate';
-import Speech from 'react-speech';
-// import responsiveVoice from 'responsivevoice';
 
 const retreiveUser = localStorage.getItem('userNm')
 
@@ -38,22 +35,22 @@ class SearchBar extends React.Component {
 
     if (!retreiveUser) {
 
-      var msg = new SpeechSynthesisUtterance('Jarvis want to know your name');
+      var msg = new SpeechSynthesisUtterance('Song Pro wants to know your name');
       msg.volume = 1;
       msg.rate = 1;
       msg.pitch = 0.8;
       msg.lang = 'en-US';
       window.speechSynthesis.speak(msg);
 
-      var IniVal = prompt("Jarvis want to know your name : ", "your name here...");
+      var IniVal = prompt("SongPro want to know your name : ", "your name here...");
 
       if (IniVal) {
         var userVal = IniVal.toLocaleLowerCase();
         console.log(userVal)
-        let user = localStorage.setItem('userNm', `${userVal}`)
+        localStorage.setItem('userNm', `${userVal}`)
         var msg = new SpeechSynthesisUtterance(`Hello.....${userVal}
-        Welcome in .....Song Pro...............................
-        Now click on the Mic ........and tell me what you want to watch today.`);
+        ........Welcome in ..... Song Pro ...............................
+        Now click on the Mic .... and tell me what you want to watch today`);
         msg.volume = 1;
         msg.rate = 1;
         msg.pitch = 0.8;
@@ -64,7 +61,8 @@ class SearchBar extends React.Component {
         }, 2000);
 
       } else {
-        let notify = new Notification('user not filled their name.')
+        console.log('user not filled their name.')
+        // let notify = new Notification('user not filled their name.')
       }
     }
   }
@@ -138,7 +136,12 @@ class SearchBar extends React.Component {
         'indifferent', 'irritated', 'melancholy', 'pessimistic', 'rejected', 'restless', 'sad', 'stressed', 'weird'
 
       ];
+      //for any search on youtube---------------------------------------------
+      // this.setState({
+      //   term: finalTranscript,
+      // });
 
+      //for only emotions search----------------------------------------------
       for (let mod = 0; mod < moodArray.length; mod++) {
 
         if ((interimTranscript === moodArray[mod]) || interimTranscript === `'feeling' ${moodArray[mod]}`) {
@@ -147,11 +150,8 @@ class SearchBar extends React.Component {
           console.log('Final Text', finalTranscript, "-----", interimTranscript)
 
           this.setState({
-
             term: interimTranscript,
-            autoFoc: true
           })
-
         }
       }
 
@@ -169,7 +169,6 @@ class SearchBar extends React.Component {
           const finalText = transcriptArr.slice(0, -3).join(' ')
           document.getElementById('final').innerHTML = finalText
           // return { notify }
-
         }
       }
     }
@@ -202,13 +201,30 @@ class SearchBar extends React.Component {
 
   componentDidMount() {
     this.intervalID = setInterval(
-      () => this.spinner(),
-      1000
-    );
+      () => {
+        this.spinner();
+      },1000);
+
+    // this.intervalID_focus = setInterval(
+    //   () => {
+    //     // this.spinner();
+    //     if (this.state.term !== null) {
+    //       console.log(112233,'first')
+    //       document.querySelector('#search-id').focus();
+    //     }else if( this.state.spinStop === 'True'|| this.props.spinStop === 'False' ){
+    //       console.log(112233,'second')
+    //       document.querySelector('#search-id').blur();
+    //     }
+    //     else{
+    //       console.log(112233,'third')
+    //       document.querySelector('#search-id').focus();
+    //     }
+    // },
+    //   1000
+    // );
   }
   componentWillUnmount() {
     clearInterval(this.intervalID);
-
   }
   spinner() {
     if (this.props.spinStop === 'True' || this.props.spinStop === 'False') {
@@ -220,7 +236,7 @@ class SearchBar extends React.Component {
 
   // micLogo() {
   //   const micStyle = {
-  //     listzz
+  //     list
   //   }
   //   return (
   //     <div onClick={this.toggleListen}>
@@ -246,14 +262,30 @@ class SearchBar extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.state.term !== null) {
-      // document.querySelector('#search-id').focus();
-    }
-  }
+
+  // componentDidUpdate(nextProps, nextState) {
+  //   if( this.state.spinStop === 'True'|| this.props.spinStop === 'False' ){
+  //     clearInterval(this.intervalID_focus);
+  //     document.querySelector('#search-id').blur();
+  //     console.log('shgcs dhvd sdjgvd sdjvd jhv')
+  //   }
+  // }
+  //   console.log('---testing for should update----------',nextProps, nextState.term)
+  //   if (nextState.term !== null) {
+  //     console.log(112233,'first')
+  //     document.querySelector('#search-id').focus();
+  //   }else if( nextProps.spinStop === 'True'|| nextProps.spinStop === 'False' ){
+  //     console.log(112233,'second')
+  //     document.querySelector('#search-id').blur();
+  //   }
+  //   else{
+  //     console.log(112233,'third')
+  //     document.querySelector('#search-id').focus();
+  //   }
+  // }
 
   render(props) {
-    
+
     return (
 
       <div>
@@ -267,12 +299,12 @@ class SearchBar extends React.Component {
             <a href='/' className="logo-style"><i className="fa fa-music fa-3x" style={{ margin: '5px' }}></i>
               <h2 className="filmIn logoName logo-nm-ad" style={{ marginTop: '2vh' }} >SongPro</h2></a>
 
-            <button className="mic-btn" 
-            style={{ display: 'none' }} 
-            id="" onClick={this.toggleListen}>
-              {this.state.listening === false ? 
-              (<i className="fa fa-microphone-slash" style={{ color: 'black' }} title="Mic On" aria-hidden="true"></i>)
-              :(<i className="fa fa-microphone" style={{ color: 'red' }} title="Mic Off" aria-hidden="true"></i>)}
+            <button className="mic-btn"
+              style={{ display: 'none' }}
+              id="" onClick={this.toggleListen}>
+              {this.state.listening === false ?
+                (<i className="fa fa-microphone-slash" style={{ color: 'black' }} title="Mic On" aria-hidden="true"></i>)
+                : (<i className="fa fa-microphone" style={{ color: 'red' }} title="Mic Off" aria-hidden="true"></i>)}
             </button>
 
             <Link to='/liked' >
@@ -317,8 +349,8 @@ class SearchBar extends React.Component {
               <span className="ripple pinkBg"></span>
               <span className="ripple pinkBg"></span>
               <span className="ripple pinkBg"></span>
-            </span>) }
-            
+            </span>)}
+
           </div>
         </div>
       </div>

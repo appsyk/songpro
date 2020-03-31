@@ -3,7 +3,7 @@ import './Modules/card.css';
 import { Route, BrowserRouter } from 'react-router-dom';
 // import FilmIn from './components/App';
 import CuTube from './Cutube';
-import ResForm from './reserveForm/App';
+// import ResForm from './reserveForm/App';
 import Edit from './reserveForm/Edit';
 import Create from './reserveForm/Create';
 import Show from './reserveForm/Show';

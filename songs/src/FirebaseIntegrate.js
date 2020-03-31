@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { AST_PrefixedTemplateString } from 'terser';
-import SearchBar from './SearchBar';
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import { AST_PrefixedTemplateString } from 'terser';
+// import SearchBar from './SearchBar';
 import playIcon from './images/play-icon.png';
 
 const userNm = localStorage.getItem('userNm');
